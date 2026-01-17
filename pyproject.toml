@@ -1,0 +1,92 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lie-algebra-smoothness"
+version = "1.0.0"
+description = "Smoothness analysis for optimization via matrix exponential on Lie algebras"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Sooraj K.C", email = "sooraj.kc@alliance.edu.in"},
+]
+maintainers = [
+    {name = "Sooraj K.C", email = "ksoorajPHD23@sam.alliance.edu.in"},
+]
+keywords = [
+    "matrix exponential",
+    "Lie algebra",
+    "optimization",
+    "smoothness",
+    "Lipschitz constant",
+    "Fréchet derivative",
+    "Riemannian optimization",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.21.0",
+    "scipy>=1.7.0",
+    "matplotlib>=3.5.0",
+    "tqdm>=4.62.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+]
+jax = [
+    "jax>=0.4.0",
+    "jaxlib>=0.4.0",
+]
+notebooks = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/soorajkcphd/lie-algebra-smoothness"
+Documentation = "https://github.com/soorajkcphd/lie-algebra-smoothness#readme"
+Repository = "https://github.com/soorajkcphd/lie-algebra-smoothness.git"
+Issues = "https://github.com/soorajkcphd/lie-algebra-smoothness/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=src/lie_smoothness --cov-report=term-missing"

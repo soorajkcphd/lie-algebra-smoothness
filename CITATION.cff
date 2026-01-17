@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "K.C."
+    given-names: "Sooraj"
+    email: "ksoorajPHD23@sam.alliance.edu.in"
+    affiliation: "Alliance University"
+  - family-names: "Mishra"
+    given-names: "Vivek"
+    email: "vivek.mishra@alliance.edu.in"
+    affiliation: "Alliance University"
+  - family-names: "Maitra"
+    given-names: "Sarit"
+    email: "sarit.maitra@alliance.edu.in"
+    affiliation: "Alliance University"
+title: "Lie Algebra Smoothness: Code for 'Intrinsic Smoothness Barriers for Optimization via the Matrix Exponential on Lie Algebras'"
+version: 1.0.0
+date-released: 2026-01-16
+url: "https://github.com/soorajkcphd/lie-algebra-smoothness"
+license: MIT
+keywords:
+  - matrix exponential
+  - Lie algebra
+  - optimization
+  - smoothness
+  - Lipschitz constant
+repository-code: "https://github.com/soorajkcphd/lie-algebra-smoothness"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "K.C."
+      given-names: "Sooraj"
+    - family-names: "Mishra"
+      given-names: "Vivek"
+    - family-names: "Maitra"
+      given-names: "Sarit"
+  title: "Intrinsic Smoothness Barriers for Optimization via the Matrix Exponential on Lie Algebras"
+  journal: "SIAM Journal on Matrix Analysis and Applications"
+  year: 2026
+  volume: 47
+  issue: 1
+  start: 1
+  end: 30
