@@ -1,16 +1,11 @@
 #!/usr/bin/env python
-"""
-Run All Experiments
-
-Reproduces all figures and tables from the paper:
-"Intrinsic Smoothness Barriers for Optimization via the Matrix Exponential on Lie Algebras"
-
-Usage:
-    python experiments/run_all.py [--quick]
-    
-Options:
-    --quick     Run with reduced samples for testing (~10 min instead of ~3 hours)
-"""
+# Run All Experiments
+# Reproduces all figures and tables from the paper:
+# "Intrinsic Smoothness Barriers for Optimization via the Matrix Exponential on Lie Algebras"
+# Usage:
+#     python experiments/run_all.py [--quick]
+# Options:
+#     --quick     Run with reduced samples for testing (~10 min instead of ~1 hours)
 
 import argparse
 import subprocess
