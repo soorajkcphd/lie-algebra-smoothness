@@ -228,9 +228,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 - **Sooraj K.C.** - sooraj.kc@alliance.edu.in
-- **Vivek Mishra** - vivek.mishra@alliance.edu.in  
-- **Sarit Maitra** - sarit.maitra@alliance.edu.in
-
 ## Changelog
 
 ### v1.0.0 (January 2026)
