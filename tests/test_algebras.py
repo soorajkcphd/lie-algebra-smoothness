@@ -75,21 +75,35 @@ class TestSpecialLinear:
         assert np.isclose(np.trace(P), 0, atol=1e-12), "Projection not traceless"
     
     def test_hard_direction_properties(self):
-        #Hard direction should have correct properties
+        #Optimal hard direction should have correct properties
         d = 8
         algebra = SpecialLinear(d)
         X0 = algebra.hard_direction()
-        
+
         # Unit norm
         assert np.isclose(np.linalg.norm(X0, 'fro'), 1.0)
-        
+
         # Traceless
         assert np.isclose(np.trace(X0), 0, atol=1e-12)
-        
-        # Eigenvalue |μ| = 1/√2
-        eigenvalues = np.linalg.eigvals(X0)
-        max_real_eig = max(abs(np.real(eigenvalues)))
-        assert np.isclose(max_real_eig, 1/np.sqrt(2), rtol=1e-10)
+
+        # Symmetric
+        assert np.allclose(X0, X0.T)
+
+        # Maximal real eigenvalue mu_d = sqrt((d-1)/d)  (Lemma 5.2, corrected)
+        mu_d = np.sqrt((d - 1) / d)
+        eigenvalues = np.linalg.eigvalsh(X0)
+        assert np.isclose(eigenvalues.max(), mu_d, rtol=1e-10)
+        assert np.isclose(algebra.max_real_eigenvalue(), mu_d, rtol=1e-10)
+
+    def test_two_eigenvalue_direction(self):
+        #The simple two-eigenvalue direction: unit norm, traceless, eig 1/sqrt2
+        d = 8
+        algebra = SpecialLinear(d)
+        X0 = algebra.two_eigenvalue_direction()
+        assert np.isclose(np.linalg.norm(X0, 'fro'), 1.0)
+        assert np.isclose(np.trace(X0), 0, atol=1e-12)
+        eigenvalues = np.linalg.eigvalsh(X0)
+        assert np.isclose(eigenvalues.max(), 1/np.sqrt(2), rtol=1e-10)
     
     def test_is_not_compact(self):
         #sl(d) should not be compact."

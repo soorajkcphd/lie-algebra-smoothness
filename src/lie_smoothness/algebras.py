@@ -162,19 +162,37 @@ class SpecialLinear(LieAlgebra):
         return X - np.trace(X) / self.d * np.eye(self.d)
     
     def hard_direction(self) -> np.ndarray:
-    
-        # Hard direction achieving maximal eigenvalue |μ| = 1/√2.
-        # X_0 = diag(1, -1, 0, ..., 0) / √2
-        # Used in lower bound construction (Theorem 5.2).
-        
+
+        # Optimal hard direction achieving the maximal real eigenvalue
+        # mu_d = sqrt((d-1)/d) for unit-norm traceless symmetric matrices
+        # (Lemma 5.2, corrected). Achieved by
+        #   X_0* = diag( sqrt((d-1)/d), -1/sqrt(d(d-1)), ..., -1/sqrt(d(d-1)) ).
+        # This element is symmetric, traceless, and has unit Frobenius norm.
+
+        d = self.d
+        top = np.sqrt((d - 1) / d)
+        rest = -1.0 / np.sqrt(d * (d - 1))
+        diag = np.full(d, rest)
+        diag[0] = top
+        return np.diag(diag)
+
+    def two_eigenvalue_direction(self) -> np.ndarray:
+
+        # The simple (non-optimal) two-eigenvalue direction
+        #   diag(1, -1, 0, ..., 0) / sqrt(2),  eigenvalue 1/sqrt(2).
+        # Retained for the d=2 special case and for comparison; this is the
+        # worst case only when d=2.
+
         X = np.zeros((self.d, self.d))
         X[0, 0] = 1.0
         X[1, 1] = -1.0
         return X / np.sqrt(2)
-    
+
     def max_real_eigenvalue(self) -> float:
-        #Maximum real eigenvalue for unit-norm traceless matrices: 1/√2.#
-        return 1.0 / np.sqrt(2)
+        # Maximal real eigenvalue of a unit-norm traceless (symmetric) matrix:
+        # mu_d = sqrt((d-1)/d)  (Lemma 5.2, corrected).
+        d = self.d
+        return np.sqrt((d - 1) / d)
 
 
 class GeneralLinear(LieAlgebra):

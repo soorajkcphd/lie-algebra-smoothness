@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # Hard Direction Experiment (Figure 2, Table 2)
 
-# Validates the lower bound construction from Theorem 5.2.
-# Uses X_0 = diag(1, -1, 0, ..., 0) / √2 with eigenvalue μ = 1/√2.
-# Expected result: Empirical exponent 1.4142 ≈ √2 (agreement to 4 sig. figs.)
+# Validates the lower bound construction from Theorem 5.3.
+# Uses the OPTIMAL hard direction X_0* = diag(sqrt((d-1)/d), -1/sqrt(d(d-1)), ...)
+# with maximal real eigenvalue mu_d = sqrt((d-1)/d) (Lemma 5.2, corrected).
+# Expected result: empirical exponent 2*mu_d (e.g. 1.8708 at d=8), matching theory.
 
 
 import argparse
@@ -21,8 +22,8 @@ from lie_smoothness.smoothness import fit_exponential_scaling
 
 def hessian_along_hard_direction(algebra: SpecialLinear, R: float) -> float:
 
-    X0 = algebra.hard_direction()  # diag(1, -1, 0, ..., 0) / √2
-    mu = algebra.max_real_eigenvalue()  # 1/√2
+    X0 = algebra.hard_direction()  # optimal: diag(sqrt((d-1)/d), -1/sqrt(d(d-1)), ...)
+    mu = algebra.max_real_eigenvalue()  # mu_d = sqrt((d-1)/d)
     
     # Setup: v is eigenvector of X0, w = exp(R*X0) v
     v = np.zeros(algebra.d)
@@ -66,10 +67,10 @@ def run_experiment(d: int = 8, radii: list = None, save: bool = True):
         radii = [0.5, 1.0, 1.5, 2.0, 3.0, 4.0]
     
     algebra = SpecialLinear(d)
-    mu = algebra.max_real_eigenvalue()  # 1/√2 ≈ 0.7071
+    mu = algebra.max_real_eigenvalue()  # mu_d = sqrt((d-1)/d)
     
     print(f"Hard Direction Experiment on sl({d})")
-    print(f"μ = 1/√2 ≈ {mu:.4f}")
+    print(f"mu_d = sqrt((d-1)/d) = {mu:.4f}")
     print(f"Theoretical exponent: 2μ = {2*mu:.4f}")
     print()
     
